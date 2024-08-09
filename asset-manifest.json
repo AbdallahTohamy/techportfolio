@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c63d183f.css",
+    "main.js": "/static/js/main.c4838ecc.js",
+    "static/js/453.d6131f9c.chunk.js": "/static/js/453.d6131f9c.chunk.js",
+    "static/media/GP.mp4": "/static/media/GP.fcee2b8573fb6f037108.mp4",
+    "static/media/Designer.jpeg": "/static/media/Designer.1f0b4a33c5e2525ad845.jpeg",
+    "static/media/sap2000export.PNG": "/static/media/sap2000export.1e77b0d6a6b70d941d2e.PNG",
+    "static/media/Abdallah-ElTohamy.pdf": "/static/media/Abdallah-ElTohamy.77c973223f8b24f1d221.pdf",
+    "static/media/analyzer.PNG": "/static/media/analyzer.95b25d953ff5ddc6d1a9.PNG",
+    "static/media/overview.PNG": "/static/media/overview.13acebef0e3950558488.PNG",
+    "static/media/out2.png": "/static/media/out2.316b0b2eeae36f21b3f3.png",
+    "static/media/out.png": "/static/media/out.5e6d904a4b3e57ecddae.png",
+    "static/media/rowing.svg": "/static/media/rowing.1d867b5d25fb8b79d43b5307c9c25ff8.svg",
+    "static/media/logo.svg": "/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "static/media/phone.svg": "/static/media/phone.e8b85a1722e47fb48359b5439b90d743.svg",
+    "static/media/mortarboard.svg": "/static/media/mortarboard.6012ce98308dbc57283a8bdd03dfa0d9.svg",
+    "static/media/case.svg": "/static/media/case.477b9ae2bd6508244f478205eefbadfc.svg",
+    "static/media/address.svg": "/static/media/address.ada261a37868692d9f6be7f17c3098da.svg",
+    "static/media/laptop.svg": "/static/media/laptop.f8d46924e01ea9e1fc4bb9523987d87f.svg",
+    "index.html": "/index.html",
+    "static/media/email.svg": "/static/media/email.cf3f71fe945fa71485f83f57292fd69e.svg",
+    "main.c63d183f.css.map": "/static/css/main.c63d183f.css.map",
+    "main.c4838ecc.js.map": "/static/js/main.c4838ecc.js.map",
+    "453.d6131f9c.chunk.js.map": "/static/js/453.d6131f9c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c63d183f.css",
+    "static/js/main.c4838ecc.js"
+  ]
+}
