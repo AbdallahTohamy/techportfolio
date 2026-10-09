@@ -1,0 +1,157 @@
+.air {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) 64px minmax(0, 1.2fr);
+  align-items: stretch;
+  padding: clamp(18px, 3vw, 30px);
+  background: rgba(14, 23, 39, 0.75);
+}
+.air-label {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.air-tasks {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+}
+.air-task {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  text-align: left;
+  font-size: 0.98rem;
+  color: var(--text-2);
+  transition: color 0.3s var(--ease), background 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.air-task .mono {
+  font-size: 0.62rem;
+}
+.air-task:hover {
+  color: var(--text);
+  background: var(--panel-hover);
+}
+.air-task.is-on {
+  color: var(--text);
+  border-color: rgba(230, 195, 117, 0.4);
+  background: var(--accent-soft);
+}
+.air-task.is-on .mono {
+  color: var(--accent);
+}
+
+.air-route {
+  display: grid;
+  place-items: center;
+}
+.air-route-line {
+  position: relative;
+  width: 100%;
+  height: 1px;
+  background: var(--line-strong);
+}
+.air-route-dot {
+  position: absolute;
+  top: -3px;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: air-travel 0.9s var(--ease) forwards;
+}
+@keyframes air-travel {
+  from { left: 0; opacity: 0.3; }
+  to { left: calc(100% - 7px); opacity: 1; }
+}
+
+.air-models {
+  display: flex;
+  flex-direction: column;
+}
+.air-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.air-model {
+  display: grid;
+  gap: 4px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(10, 17, 29, 0.5);
+  opacity: 0.5;
+  transition: opacity 0.35s var(--ease), border-color 0.35s var(--ease), background 0.35s var(--ease), transform 0.35s var(--ease);
+}
+.air-model.is-on {
+  opacity: 1;
+  border-color: var(--accent);
+  background: rgba(230, 195, 117, 0.06);
+  transform: translateY(-2px);
+}
+.air-model strong {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+.air-role {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.air-host {
+  justify-self: start;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  font-size: 0.54rem;
+}
+.air-host.self {
+  color: #7fd8a4;
+  border-color: rgba(127, 216, 164, 0.35);
+}
+.air-host.api {
+  color: var(--blue);
+  border-color: rgba(127, 176, 255, 0.35);
+}
+
+.air-why {
+  margin-top: 16px;
+  min-height: 84px;
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+}
+.air-why p {
+  color: var(--text);
+}
+.air-why .mono {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--accent);
+}
+
+.air-foot {
+  margin-top: 14px;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-size: 0.7rem;
+}
+
+@media (max-width: 960px) {
+  .air {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .air-route {
+    display: none;
+  }
+}
+@media (max-width: 560px) {
+  .air-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

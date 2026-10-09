@@ -1,0 +1,324 @@
+.contact {
+  padding-bottom: 40px;
+}
+.ct {
+  display: grid;
+  gap: 28px;
+}
+.ct-title {
+  font-size: clamp(2.2rem, 6vw, 4.6rem);
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+  max-width: 1000px;
+}
+.ct-title em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.ct-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: start;
+  margin-top: clamp(30px, 4vw, 48px);
+}
+
+.ct-email-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 18px;
+}
+.ct-email {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2.4vw, 1.6rem);
+  border-bottom: 1px solid var(--line-strong);
+  padding-bottom: 4px;
+  overflow-wrap: anywhere;
+  transition: color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.ct-email:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.ct-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 30px;
+  border-top: 1px solid var(--line);
+}
+.ct-cell {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 20px 16px 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+.ct-cell:nth-child(even) {
+  padding-left: 16px;
+  border-left: 1px solid var(--line);
+}
+.ct-cell a:hover {
+  color: var(--accent);
+}
+.ct-clock {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  font-variant-numeric: tabular-nums;
+}
+.ct-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+}
+
+/* ---------- form ---------- */
+.cf {
+  padding: clamp(20px, 3vw, 28px);
+  background: rgba(14, 23, 39, 0.8);
+}
+.cf-pipe {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+.cf-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cf-stage .mono {
+  font-size: 0.58rem;
+  text-transform: none;
+  white-space: nowrap;
+  transition: color 0.4s var(--ease);
+}
+.cf-node {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  transition: background 0.4s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+.cf-stage.is-on .cf-node {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+.cf-stage.is-on .mono {
+  color: var(--accent);
+}
+.cf-stage.is-err .cf-node {
+  background: #f0a27a;
+  border-color: #f0a27a;
+}
+.cf-stage.is-err .mono {
+  color: #f0a27a;
+}
+.cf-wire {
+  position: relative;
+  flex: 1;
+  height: 1px;
+  margin: 0 8px;
+  background: var(--line-strong);
+}
+.cf-packet {
+  position: absolute;
+  top: -2.5px;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: cf-travel 0.9s var(--ease) infinite;
+}
+@keyframes cf-travel {
+  from { left: 0; opacity: 1; }
+  to { left: calc(100% - 6px); opacity: 0.2; }
+}
+
+.cf-fields {
+  display: grid;
+  gap: 16px;
+}
+.cf-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.cf-topics legend {
+  margin-bottom: 10px;
+}
+.cf-topic {
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: var(--text-2);
+  cursor: pointer;
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease), background 0.3s var(--ease);
+}
+.cf-topic input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.cf-topic:hover {
+  color: var(--text);
+  border-color: var(--line-strong);
+}
+.cf-topic.is-on {
+  color: var(--text);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.cf-topic:focus-within {
+  outline: 1.5px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.cf-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.cf-field {
+  display: grid;
+  gap: 8px;
+}
+.cf-field .mono {
+  display: flex;
+  justify-content: space-between;
+}
+.cf-count {
+  opacity: 0.7;
+}
+.cf-field input,
+.cf-field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: rgba(10, 17, 29, 0.6);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.95rem;
+  resize: vertical;
+  transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+}
+.cf-field input:focus,
+.cf-field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: rgba(10, 17, 29, 0.9);
+}
+.cf-field [aria-invalid='true'] {
+  border-color: #f0a27a;
+}
+.cf-field em {
+  font-style: normal;
+  font-size: 0.8rem;
+  color: #f0a27a;
+}
+.cf-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.cf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 18px;
+}
+.cf-actions .btn[disabled] {
+  opacity: 0.7;
+  cursor: progress;
+}
+.cf-error {
+  font-size: 0.88rem;
+  color: #f0a27a;
+}
+.cf-fallback {
+  color: var(--text);
+  border-bottom: 1px solid var(--line-strong);
+}
+.cf-fallback:hover {
+  color: var(--accent);
+}
+
+.cf-done {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+  padding: 18px 0 6px;
+}
+.cf-check {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--bg);
+  font-size: 1.2rem;
+}
+.cf-done h3 {
+  font-size: 1.6rem;
+}
+.cf-done p {
+  color: var(--text-2);
+}
+
+.ft {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px 24px;
+  margin-top: clamp(80px, 10vw, 120px);
+  padding-top: 22px;
+  padding-bottom: calc(22px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--line);
+}
+.ft .mono {
+  font-size: 0.62rem;
+}
+.ft a:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 960px) {
+  .ct-layout {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 520px) {
+  .ct-br {
+    display: none;
+  }
+  .ct-grid,
+  .cf-row {
+    grid-template-columns: 1fr;
+  }
+  .ct-cell:nth-child(even) {
+    padding-left: 0;
+    border-left: 0;
+  }
+  .cf-stage .mono {
+    font-size: 0.52rem;
+  }
+}

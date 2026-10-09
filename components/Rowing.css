@@ -1,0 +1,142 @@
+.rw {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
+.rw-map {
+  padding: 10px;
+  overflow: hidden;
+}
+.rw-svg {
+  width: 100%;
+  height: auto;
+}
+.rw-grid {
+  stroke: var(--line);
+  stroke-dasharray: 1 5;
+}
+.rw-grid-t {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  fill: var(--muted);
+  opacity: 0.7;
+}
+.rw-sea {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 15px;
+  letter-spacing: 0.3em;
+  fill: rgba(140, 170, 220, 0.22);
+  text-anchor: middle;
+}
+.rw-arc {
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: 1.1;
+  stroke-dasharray: 4 4;
+  transition: stroke 0.4s var(--ease);
+}
+.rw-arc.is-on {
+  stroke: var(--accent);
+}
+
+.rw-pin {
+  cursor: pointer;
+  outline: none;
+}
+.rw-hit {
+  fill: transparent;
+}
+.rw-dot {
+  fill: var(--bg);
+  stroke: var(--text-2);
+  stroke-width: 1.5;
+  transition: fill 0.3s var(--ease), stroke 0.3s var(--ease);
+}
+.rw-ring {
+  fill: none;
+  stroke: var(--line-strong);
+}
+.rw-pin text {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  fill: var(--text-2);
+  transition: fill 0.3s var(--ease);
+}
+.rw-pin.is-on .rw-dot,
+.rw-pin:focus-visible .rw-dot {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+.rw-pin.is-on text {
+  fill: var(--accent);
+}
+
+.rw-side {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 20px;
+}
+.rw-card {
+  padding: 24px;
+  min-height: 210px;
+}
+.rw-card h3 {
+  margin-top: 8px;
+  font-size: 1.8rem;
+}
+.rw-card ul {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.rw-card li {
+  position: relative;
+  padding-left: 18px;
+  color: var(--text-2);
+  font-size: 0.94rem;
+}
+.rw-card li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+}
+
+.rw-facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line);
+}
+.rw-fact {
+  display: grid;
+  gap: 4px;
+  padding: 18px 12px 0 0;
+}
+.rw-fact strong {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.8rem;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+  line-height: 1;
+}
+.rw-fact span {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+@media (max-width: 900px) {
+  .rw {
+    grid-template-columns: 1fr;
+  }
+}

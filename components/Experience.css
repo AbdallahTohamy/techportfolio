@@ -1,0 +1,81 @@
+.xp {
+  padding: clamp(20px, 3.5vw, 36px);
+}
+.xp + .xp {
+  margin-top: 24px;
+}
+
+.xp-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px 24px;
+}
+.xp-head h3 {
+  margin-top: 8px;
+  font-size: clamp(1.35rem, 2.6vw, 1.8rem);
+}
+.xp-head h3 span {
+  color: var(--muted);
+}
+.xp-now {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 6px;
+  padding: 4px 10px;
+  border: 1px solid rgba(230, 195, 117, 0.4);
+  border-radius: 999px;
+  font-size: 0.6rem;
+  color: var(--accent);
+  text-transform: none;
+}
+.xp-now:hover {
+  background: var(--accent-soft);
+}
+.xp-summary {
+  margin: 16px 0 34px;
+  max-width: 760px;
+  color: var(--text-2);
+}
+
+.xp-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.xp-rows {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1px;
+  margin-top: 30px;
+  border-block: 1px solid var(--line);
+  background: var(--line);
+}
+.xp-row {
+  padding: 24px 20px 18px;
+  background: #0c1320;
+}
+.xp-metric {
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--accent);
+}
+.xp-row .mono {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.64rem;
+}
+.xp-row h4 {
+  margin-top: 18px;
+  font-size: 1.05rem;
+}
+.xp-row p:last-child {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+

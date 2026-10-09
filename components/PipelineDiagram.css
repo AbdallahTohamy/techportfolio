@@ -1,0 +1,138 @@
+.pd {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 270px;
+  gap: 28px;
+  align-items: stretch;
+}
+
+.pd-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.pd-edge {
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: 1.2;
+  transition: stroke 0.4s var(--ease);
+}
+.pd-edge.is-lit {
+  stroke: rgba(230, 195, 117, 0.7);
+}
+.pd-arrowhead {
+  fill: var(--line-strong);
+}
+.pd-packet {
+  fill: var(--accent);
+}
+
+.pd-node {
+  cursor: pointer;
+  outline: none;
+}
+.pd-node rect {
+  fill: #0e1727;
+  stroke: var(--line-strong);
+  stroke-width: 1;
+  transition: fill 0.35s var(--ease), stroke 0.35s var(--ease);
+}
+.pd-node:hover rect,
+.pd-node:focus-visible rect {
+  stroke: var(--text-2);
+}
+.pd-node.is-active rect {
+  fill: #1a1e22;
+  stroke: var(--accent);
+}
+.pd-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  fill: var(--muted);
+}
+.pd-node.is-active .pd-tag {
+  fill: var(--accent);
+}
+.pd-title {
+  font-family: var(--font-display);
+  font-size: 17px;
+  fill: var(--text);
+}
+
+.pd-legend text {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  fill: var(--muted);
+}
+
+.pd-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 22px;
+  border-left: 1px solid var(--line);
+  min-height: 230px;
+}
+.pd-detail h4 {
+  margin-top: 10px;
+  font-size: 1.3rem;
+}
+.pd-metric {
+  margin-top: 16px;
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+}
+.pd-metric span {
+  display: block;
+  margin-top: 8px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  letter-spacing: 0;
+  color: var(--text-2);
+}
+.pd-text {
+  margin-top: 14px;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+.pd-dots {
+  display: flex;
+  gap: 6px;
+}
+.pd-dots span {
+  width: 14px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--line-strong);
+  transition: background 0.4s var(--ease), width 0.4s var(--ease);
+}
+.pd-dots span.is-on {
+  width: 26px;
+  background: var(--accent);
+}
+
+@media (max-width: 960px) {
+  .pd {
+    grid-template-columns: 1fr;
+  }
+  .pd-detail {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding: 22px 0 0;
+    min-height: 0;
+  }
+}
+@media (max-width: 720px) {
+  .pd-canvas {
+    max-width: 420px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
