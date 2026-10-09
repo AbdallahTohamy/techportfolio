@@ -1,34 +1,57 @@
 import Script from 'next/script';
-import '@fontsource/space-grotesk/400.css';
-import '@fontsource/space-grotesk/500.css';
-import '@fontsource/inter/400.css';
-import '@fontsource/inter/500.css';
-import '@fontsource/jetbrains-mono/400.css';
+import { profile } from '@/data/content';
+import { seo, siteUrl } from '@/lib/site';
+import { body, display, mono } from './fonts';
 import './globals.css';
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export const metadata = {
-  metadataBase: new URL(process.env.URL || 'https://abdallahtohamy.netlify.app'),
-  title: 'Abdallah El Tohamy · Software Engineer',
-  description:
-    'Software engineer for full stack, DevOps and AI. Building solutions through code and innovation: Evvot, Hilite, Complete Greet. Based in Cairo.',
+  metadataBase: new URL(siteUrl),
+  title: { default: seo.title, template: `%s · ${seo.shortTitle}` },
+  description: seo.description,
+  keywords: seo.keywords,
+  applicationName: seo.shortTitle,
+  authors: [{ name: profile.name, url: siteUrl }],
+  creator: profile.name,
+  publisher: profile.name,
+  category: 'technology',
+  alternates: { canonical: '/' },
+  formatDetection: { email: false, address: false, telephone: false },
   openGraph: {
-    title: 'Abdallah El Tohamy · Software Engineer',
-    description: 'Building solutions through code and innovation. Full stack, DevOps and AI.',
-    images: ['/media/projects/evvot-hero.webp'],
-    type: 'website',
+    type: 'profile',
+    url: '/',
+    siteName: seo.shortTitle,
+    title: seo.title,
+    description: seo.description,
+    locale: seo.locale,
+    firstName: 'Abdallah',
+    lastName: 'El Tohamy',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: seo.title,
+    description: seo.description,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 },
+  },
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && {
+    verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION },
+  }),
 };
 
 export const viewport = {
   themeColor: '#0a111d',
+  colorScheme: 'dark',
   viewportFit: 'cover',
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`}>
       <body>
         {children}
         {GA_ID && (

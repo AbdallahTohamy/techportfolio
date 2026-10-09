@@ -36,7 +36,7 @@ export default function Nav() {
   return (
     <header className={`nav ${scrolled ? 'is-scrolled' : ''}`}>
       <div className="container nav-inner">
-        <a href="#top" className="nav-mark" aria-label="Back to top">
+        <a href="/#top" className="nav-mark" aria-label="Abdallah El Tohamy, home">
           <span className="nav-logo">AE</span>
           <span className="nav-name">{profile.name}</span>
         </a>
@@ -45,7 +45,7 @@ export default function Nav() {
           {sections.map((s, i) => (
             <a
               key={s.id}
-              href={`#${s.id}`}
+              href={`/#${s.id}`}
               className={active === s.id ? 'is-active' : ''}
               onClick={() => setOpen(false)}
             >

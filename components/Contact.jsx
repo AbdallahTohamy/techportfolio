@@ -82,7 +82,7 @@ function ContactForm() {
           >
             <span className="cf-check">✓</span>
             <h3>Message delivered.</h3>
-            <p>Thanks, {form.name.split(' ')[0]}. I usually reply within a day. Check {form.email} for my answer.</p>
+            <p>Thanks, {form.name.split(' ')[0]}. I will get back to you within a few days. A confirmation is on its way to {form.email}.</p>
             <button
               type="button"
               className="btn"
@@ -255,7 +255,7 @@ export default function Contact() {
       <footer className="container ft">
         <span className="mono">© {new Date().getFullYear()} {profile.name}</span>
         <span className="mono">Built with Next.js, Node.js & Framer Motion · deployed with CI/CD</span>
-        <a href="#top" className="mono">
+        <a href="/#top" className="mono">
           Back to top ↑
         </a>
       </footer>

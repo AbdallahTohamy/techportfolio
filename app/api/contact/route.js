@@ -1,12 +1,14 @@
 import { NextResponse } from 'next/server';
+import nodemailer from 'nodemailer';
+import { profile } from '@/data/content';
+import { confirmationEmail, notificationEmail } from '@/lib/emailTemplates';
 
 export const runtime = 'nodejs';
 
 const TOPICS = ['Project', 'Job opportunity', 'Collaboration', 'Just saying hi'];
 const LIMIT = { windowMs: 10 * 60 * 1000, max: 5 };
-const hits = new Map(); // best-effort, per server instance
+const hits = new Map(); // best effort, per server instance
 
-const esc = (s) => s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const isEmail = (s) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s);
 
 function rateLimited(ip) {
@@ -15,6 +17,16 @@ function rateLimited(ip) {
   recent.push(now);
   hits.set(ip, recent);
   return recent.length > LIMIT.max;
+}
+
+// Gmail SMTP with an App Password. Credentials only ever come from the environment.
+let transporter;
+function mailer() {
+  const user = process.env.GMAIL_ADDRESS;
+  const pass = process.env.GMAIL_APP_PASSWORD?.replace(/\s+/g, '');
+  if (!user || !pass) return null;
+  transporter ??= nodemailer.createTransport({ service: 'gmail', auth: { user, pass } });
+  return transporter;
 }
 
 export async function POST(req) {
@@ -44,37 +56,34 @@ export async function POST(req) {
     return NextResponse.json({ error: 'Too many messages. Please try again in a few minutes.' }, { status: 429 });
   }
 
-  const key = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_TO_EMAIL;
-  if (!key || !to) {
-    return NextResponse.json(
-      { error: 'The mail service is not set up yet. Please email me directly.', fallback: true },
-      { status: 503 }
-    );
+  const smtp = mailer();
+  const from = process.env.GMAIL_ADDRESS;
+  const notifyTo = process.env.CONTACT_NOTIFY_EMAIL || from;
+  if (!smtp) {
+    return NextResponse.json({ error: 'The mail service is not set up yet. Please email me directly.', fallback: true }, { status: 503 });
   }
 
-  const res = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      from: process.env.CONTACT_FROM_EMAIL || 'Portfolio <onboarding@resend.dev>',
-      to: [to],
-      reply_to: email,
-      subject: `Portfolio · ${topic} · ${name}`,
-      text: `${message}\n\n${name} <${email}>\nTopic: ${topic}`,
-      html: `<div style="font-family:system-ui,sans-serif;line-height:1.6;color:#111">
-        <p style="color:#666;margin:0 0 4px">New message from your portfolio · <b>${esc(topic)}</b></p>
-        <h2 style="margin:0 0 12px">${esc(name)} &lt;${esc(email)}&gt;</h2>
-        <p style="white-space:pre-wrap">${esc(message)}</p>
-      </div>`,
-    }),
-  }).catch(() => null);
+  const sender = `"${profile.name}" <${from}>`;
+  const data = { name, email, topic, message };
 
-  if (!res || !res.ok) {
-    const detail = res ? await res.text().catch(() => '') : 'network error';
-    console.error('Resend error', res?.status, detail);
+  // 1. Tell Abdallah. This one must succeed, otherwise the request would be lost.
+  try {
+    const n = notificationEmail(data);
+    await smtp.sendMail({ from: sender, to: notifyTo, replyTo: `"${name}" <${email}>`, ...n });
+  } catch (err) {
+    console.error('Contact notification failed:', err?.message);
     return NextResponse.json({ error: 'Could not send right now. Please email me directly.', fallback: true }, { status: 502 });
   }
 
-  return NextResponse.json({ ok: true });
+  // 2. Confirm to the visitor. If this fails the request is still received, so don't fail the response.
+  let confirmed = true;
+  try {
+    const c = confirmationEmail(data);
+    await smtp.sendMail({ from: sender, to: `"${name}" <${email}>`, replyTo: sender, ...c });
+  } catch (err) {
+    confirmed = false;
+    console.error('Contact confirmation failed:', err?.message);
+  }
+
+  return NextResponse.json({ ok: true, confirmed });
 }

@@ -97,6 +97,9 @@
 .card.is-wide .card-body {
   justify-content: center;
 }
+a.card-title {
+  display: inline-block;
+}
 .card-title {
   font-family: var(--font-display);
   font-size: clamp(1.35rem, 2.2vw, 1.7rem);

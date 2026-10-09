@@ -29,9 +29,17 @@ function ProjectCard({ project, index, onOpen }) {
           {String(index + 1).padStart(2, '0')} · {project.kicker}
         </span>
         <h3>
-          <button className="card-title" onClick={(e) => (e.stopPropagation(), onOpen(project))}>
+          <a
+            href={`/projects/${project.id}`}
+            className="card-title"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onOpen(project);
+            }}
+          >
             {project.title}
-          </button>
+          </a>
         </h3>
         {(project.site || project.status) && (
           <div className="card-flags">
@@ -58,9 +66,13 @@ function ProjectCard({ project, index, onOpen }) {
           </ul>
         )}
         <div className="card-foot">
-          <p className="card-metric">
-            {project.metric.value} <span>{project.metric.label}</span>
-          </p>
+          {project.metric ? (
+            <p className="card-metric">
+              {project.metric.value} <span>{project.metric.label}</span>
+            </p>
+          ) : (
+            <span />
+          )}
           <span className="card-more mono">Details →</span>
         </div>
         <div className="card-stack">

@@ -8,12 +8,14 @@ import Providers from '@/components/Providers';
 // import Rowing from '@/components/Rowing'; // hidden for now
 import Skills from '@/components/Skills';
 import Stats from '@/components/Stats';
+import StructuredData from '@/components/StructuredData';
 import Testimonials from '@/components/Testimonials';
 import Work from '@/components/Work';
 
 export default function Home() {
   return (
     <Providers>
+      <StructuredData />
       <BlueprintBackground />
       <Nav />
       <main style={{ position: 'relative', zIndex: 1 }}>

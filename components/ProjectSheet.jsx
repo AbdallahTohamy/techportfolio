@@ -63,10 +63,14 @@ export default function ProjectSheet({ project, onClose }) {
             {project.status && <span className="sheet-status mono">{project.status}</span>}
             <p className="sheet-blurb">{project.blurb}</p>
 
-            <div className="sheet-metric">
-              <strong>{project.metric.value}</strong>
-              <span>{project.metric.label}</span>
-            </div>
+            {project.metric ? (
+              <div className="sheet-metric">
+                <strong>{project.metric.value}</strong>
+                <span>{project.metric.label}</span>
+              </div>
+            ) : (
+              <div className="sheet-metric is-empty" />
+            )}
 
             <ul className="sheet-list">
               {project.body.map((b) => (
@@ -88,6 +92,11 @@ export default function ProjectSheet({ project, onClose }) {
                 ))}
               </div>
             )}
+            <p className="sheet-page">
+              <a href={`/projects/${project.id}`} className="mono">
+                Open the full project page →
+              </a>
+            </p>
 
             <div className="sheet-block">
               <span className="mono">Stack</span>

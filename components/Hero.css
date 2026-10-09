@@ -11,6 +11,11 @@
   align-items: center;
 }
 
+.hero-h1 {
+  margin: 0;
+  font: inherit;
+  letter-spacing: normal;
+}
 .hero-name {
   display: flex;
   align-items: center;
@@ -46,6 +51,9 @@
 }
 
 .hero-title {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 500;
   font-size: clamp(2.4rem, 4.8vw, 4rem);
   letter-spacing: -0.04em;
   line-height: 1.04;
@@ -306,4 +314,20 @@
     height: 220px;
     font-size: 0.7rem;
   }
+}
+
+/* entrance: CSS only, so content is painted before JS */
+.rise {
+  animation: hero-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.rise-soft {
+  animation: hero-rise-soft 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes hero-rise-soft {
+  from { transform: translateY(12px); }
+  to { transform: none; }
 }

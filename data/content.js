@@ -11,7 +11,7 @@ export const profile = {
   email: 'abdallah22335a@gmail.com',
   phone: '+20 115 686 1435',
   whatsapp: 'https://wa.me/201156861435',
-  cv: '/cv.pdf',
+  cv: '/Abdallah-ElTohamy-Resume.pdf',
   links: [
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/abdallah-el-tohamy-75bb432a8/' },
     { label: 'Upwork', href: 'https://www.upwork.com/freelancers/~01aa362e1eb8de88b8' },
@@ -82,7 +82,7 @@ export const freelance = {
   ],
 };
 
-export const filters = ['All', 'Products', 'Full stack', 'AI & Media', 'Real time'];
+export const filters = ['All', 'Products', 'Websites', 'Full stack', 'AI & Media', 'Real time'];
 
 const M = '/media/projects';
 
@@ -159,6 +159,72 @@ const allProjects = [
       { src: `${M}/cg-buttons.webp`, alt: 'Choosing widget buttons with a live example', caption: 'Button builder with live preview' },
     ],
     sessionDemo: true,
+  },
+  {
+    id: 'madany',
+    title: 'Madany',
+    kicker: 'Product · construction data intelligence',
+    categories: ['Products', 'Websites', 'Full stack', 'AI & Media'],
+    visual: 'shot',
+    wide: true,
+    site: { label: 'madany.co', href: 'https://madany.co/' },
+    blurb: 'Turns construction daily work records into structured Excel data, reviewed reports and clear management visuals.',
+    metric: { value: '3', label: 'outputs from every record' },
+    stack: ['Next.js', 'React', 'Design system', 'AI extraction', 'Netlify'],
+    body: [
+      'Marketing site and product demo on the Next.js App Router, built from one shared design system.',
+      'AI structures the daily records, then engineers review the result before it reaches the client.',
+      'Three outputs: structured Excel data, a reviewed intelligence report and management visuals.',
+      'A guided sample output lets visitors follow one record all the way into the final report.',
+    ],
+    screens: [
+      { src: `${M}/madany-hero.webp`, alt: 'Madany landing page', caption: 'madany.co' },
+      { src: `${M}/madany-outputs.webp`, alt: 'Madany outputs: structured Excel data, intelligence report and management visuals', caption: 'Three practical outputs' },
+      { src: `${M}/madany-record.webp`, alt: 'Madany process from scope to delivery', caption: 'From scope to delivery' },
+    ],
+  },
+  {
+    id: 'si50',
+    title: 'Sustainable Infrastructure 2050',
+    kicker: 'Website · international conference',
+    categories: ['Websites', 'Full stack'],
+    visual: 'shot',
+    wide: true,
+    site: { label: 'conference website', href: 'https://csce-si50.com/' },
+    blurb: 'Official website of the SI50 conference at the American University in Cairo, December 27 to 29, 2026, organized by AUC and CSCE.',
+    metric: { value: 'Dec 2026', label: 'conference in Cairo' },
+    stack: ['HTML5', 'CSS3', 'JavaScript', 'Netlify'],
+    body: [
+      'Pages for the committee, submissions, registration, program, venue and international delegates.',
+      'Call for abstracts with conference themes, important dates and a clear registration path.',
+      'A fast static build served from Netlify for authors and delegates worldwide.',
+    ],
+    screens: [
+      { src: `${M}/csce-hero.webp`, alt: 'SI50 conference website home page', caption: 'Conference home page' },
+      { src: `${M}/csce-welcome.webp`, alt: 'Welcome message from the conference co chairs', caption: 'Welcome from the co chairs' },
+      { src: `${M}/csce-submissions.webp`, alt: 'Call for abstracts, themes and important dates', caption: 'Call for abstracts and important dates' },
+    ],
+  },
+  {
+    id: 'aknsprkr',
+    title: 'AKNS PRKR',
+    kicker: 'Website · creative agency',
+    categories: ['Websites'],
+    visual: 'shot',
+    wide: true,
+    site: { label: 'agency website', href: 'https://capable-dolphin-92ff87.netlify.app/' },
+    blurb: 'A scroll driven agency website: bold brand statements on one side, full bleed imagery on the other, and case studies like the Toyota RAV4 relaunch.',
+    stack: ['HTML5', 'CSS3', 'JavaScript', 'jQuery', 'Bootstrap', 'Netlify'],
+    body: [
+      'Split screen storytelling that changes panel by panel as you scroll.',
+      'Sections for values, services, and featured and classic case studies.',
+      'Built with HTML5, CSS3, JavaScript, jQuery and Bootstrap, deployed on Netlify.',
+    ],
+    screens: [
+      { src: `${M}/aknsprkr-hero.webp`, alt: 'AKNS PRKR website opening with the Toyota RAV4 case study', caption: 'Toyota RAV4 case study' },
+      { src: `${M}/aknsprkr-story.webp`, alt: 'Split screen brand statement with full bleed image', caption: 'Split screen storytelling' },
+      { src: `${M}/aknsprkr-case.webp`, alt: 'Case study panel for a hotel brand', caption: 'Case studies' },
+    ],
   },
   {
     id: 'trainbridge',
@@ -290,14 +356,16 @@ const allSkillClusters = [
   {
     name: 'Full stack web',
     skills: [
-      { name: 'React · Next.js', uses: ['shanda', 'hilite', 'evvot', 'monitor'] },
+      { name: 'React · Next.js', uses: ['shanda', 'hilite', 'evvot', 'monitor', 'madany'] },
       { name: 'Node.js · Express', uses: ['shanda', 'evvot', 'completegreet', 'trainbridge', 'monitor', 'truss'] },
-      { name: 'TypeScript · JavaScript', uses: ['shanda', 'evvot', 'completegreet', 'trainbridge', 'truss', 'freelance'] },
+      { name: 'TypeScript · JavaScript', uses: ['shanda', 'evvot', 'completegreet', 'trainbridge', 'truss', 'si50', 'aknsprkr', 'freelance'] },
       { name: 'REST APIs', uses: ['shanda', 'hilite', 'trainbridge'] },
       { name: 'WebSockets · Socket.IO', uses: ['completegreet', 'monitor', 'trainbridge', 'freelance'] },
       { name: 'MySQL · Sequelize', uses: ['shanda', 'completegreet', 'trainbridge', 'monitor'] },
       { name: 'Stripe & auth', uses: ['shanda'] },
       { name: 'WebGL · Three.js', uses: ['evvot', 'truss'] },
+      { name: 'HTML · CSS · Bootstrap', uses: ['si50', 'aknsprkr', 'trainbridge'] },
+      { name: 'Design systems · SEO', uses: ['madany', 'si50'] },
     ],
   },
   {
@@ -311,6 +379,7 @@ const allSkillClusters = [
       { name: 'Azure', uses: ['evvot', 'freelance'] },
       { name: 'GCP · serverless', uses: ['evvot'] },
       { name: 'DigitalOcean', uses: ['completegreet', 'freelance'] },
+      { name: 'Netlify', uses: ['madany', 'si50', 'aknsprkr'] },
       { name: 'Linux · Nginx', uses: ['shanda', 'completegreet', 'freelance'] },
       { name: 'Testing (Jest)', uses: ['shanda', 'hilite'] },
     ],
@@ -318,7 +387,7 @@ const allSkillClusters = [
   {
     name: 'AI & ML',
     skills: [
-      { name: 'LLM pipelines', uses: ['shanda', 'freelance', 'hilite', 'vision'] },
+      { name: 'LLM pipelines', uses: ['shanda', 'freelance', 'hilite', 'vision', 'madany'] },
       { name: 'Prompt & context engineering', uses: ['shanda', 'freelance', 'hilite'] },
       { name: 'MCP / tool calling', uses: ['shanda'] },
       { name: 'Self hosted models', uses: ['shanda', 'hilite', 'freelance'] },

@@ -182,7 +182,7 @@ export default function DeployTerminal() {
         ].map(([name, tech, n]) => (
           <div key={name} className="term-svc">
             <span className="mono">{name}</span>
-            <span className="term-pods" aria-label={`${n} running`}>
+            <span className="term-pods" role="img" aria-label={`${n} running`}>
               {Array.from({ length: n }, (_, i) => (
                 <i key={i} />
               ))}
