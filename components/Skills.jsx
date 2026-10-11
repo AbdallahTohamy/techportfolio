@@ -21,7 +21,7 @@ export default function Skills() {
   return (
     <section id="skills" className="section">
       <div className="container">
-        <SectionHead index="05" label="Skills" title="A toolkit, wired to real work.">
+        <SectionHead index="06" label="Skills" title="A toolkit, wired to real work.">
           Hover or tap any skill to see where I have used it in production.
         </SectionHead>
 

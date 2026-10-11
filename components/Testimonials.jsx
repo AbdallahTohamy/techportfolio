@@ -37,7 +37,7 @@ export default function Testimonials() {
     <section id="reviews" className="section">
       <div className="container">
         <SectionHead
-          index="04"
+          index="05"
           label="Reviews"
           title={`${testimonials.length} reviews. All five stars. ${byCountry.length} countries.`}
         >

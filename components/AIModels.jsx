@@ -33,7 +33,7 @@ export default function AIModels() {
   return (
     <section id="ai" className="section">
       <div className="container">
-        <SectionHead index="03" label="AI" title="The right model for each job.">
+        <SectionHead index="04" label="AI" title="The right model for each job.">
           {ai.intro}
         </SectionHead>
 

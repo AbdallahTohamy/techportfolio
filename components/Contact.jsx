@@ -188,7 +188,7 @@ export default function Contact() {
     <section id="contact" className="section contact">
       <div className="container">
         <Reveal className="ct">
-          <span className="mono section-index">06 / Contact</span>
+          <span className="mono section-index">07 / Contact</span>
           <h2 className="ct-title">
             Have a product, a platform or an idea <br className="ct-br" />
             that needs to <em>ship</em>?

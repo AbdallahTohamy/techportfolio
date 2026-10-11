@@ -1,5 +1,6 @@
 import BlueprintBackground from '@/components/BlueprintBackground';
 import AIModels from '@/components/AIModels';
+import CloudOps from '@/components/CloudOps';
 import Contact from '@/components/Contact';
 import Experience from '@/components/Experience';
 import Hero from '@/components/Hero';
@@ -23,6 +24,7 @@ export default function Home() {
         <Stats />
         <Experience />
         <Work />
+        <CloudOps />
         <AIModels />
         <Testimonials />
         <Skills />

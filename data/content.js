@@ -322,6 +322,157 @@ const allProjects = [
 export const projects = allProjects.filter((p) => !p.hidden);
 const visibleIds = new Set(['shanda', 'freelance', ...projects.map((p) => p.id)]);
 
+// Cloud section: hosting patterns I set up, labelled per provider, plus CI/CD platforms.
+// Node labels can be a string or { aws, gcp, azure }.
+export const cloud = {
+  intro:
+    'From a single Linux VPS to load balanced fleets and serverless containers. I pick the setup that fits the traffic and the budget, then ship it through CI/CD.',
+  providers: [
+    { id: 'aws', label: 'AWS' },
+    { id: 'gcp', label: 'Google Cloud' },
+    { id: 'azure', label: 'Azure' },
+  ],
+  patterns: [
+    {
+      id: 'lb',
+      name: 'Load balanced',
+      line: 'Several servers behind a load balancer, scaling with traffic.',
+      tiers: [
+        [{ title: 'Users', sub: 'browsers and apps' }],
+        [{ title: { aws: 'Route 53 + CloudFront', gcp: 'Cloud DNS + CDN', azure: 'DNS + Front Door' }, sub: 'DNS and CDN' }],
+        [{ title: { aws: 'Load Balancer (ALB)', gcp: 'Cloud Load Balancing', azure: 'Application Gateway' }, sub: 'TLS and health checks' }],
+        [
+          { title: { aws: 'EC2', gcp: 'Compute Engine', azure: 'Virtual Machine' }, sub: 'app server 1' },
+          { title: { aws: 'EC2', gcp: 'Compute Engine', azure: 'Virtual Machine' }, sub: 'app server 2' },
+          { title: { aws: 'EC2', gcp: 'Compute Engine', azure: 'Virtual Machine' }, sub: 'app server 3' },
+        ],
+        [{ title: { aws: 'RDS MySQL', gcp: 'Cloud SQL', azure: 'Azure MySQL' }, sub: 'managed database' }],
+      ],
+      group: { from: 3, to: 3, label: { aws: 'Auto Scaling group', gcp: 'Managed instance group', azure: 'VM Scale Set' } },
+      notes: [
+        'Health checks take bad servers out of rotation automatically.',
+        'Auto scaling adds servers on CPU and request load, and removes them when it drops.',
+        'TLS ends at the load balancer, so app servers stay simple.',
+        'Rolling deploys keep the site up while new versions go out.',
+      ],
+    },
+    {
+      id: 'vps',
+      name: 'VPS',
+      line: 'One Linux server, set up by hand and hardened properly.',
+      tiers: [
+        [{ title: 'Users', sub: 'browsers and apps' }],
+        [{ title: 'Nginx', sub: 'reverse proxy and TLS' }],
+        [
+          { title: 'App container', sub: 'Node.js' },
+          { title: 'Worker container', sub: 'FFmpeg jobs' },
+        ],
+        [{ title: 'MySQL container', sub: 'volume with backups' }],
+      ],
+      group: { from: 1, to: 3, label: { aws: 'Ubuntu on EC2 or Lightsail', gcp: 'Ubuntu on Compute Engine', azure: 'Ubuntu on an Azure VM' } },
+      notes: [
+        'Ubuntu with SSH keys only, a ufw firewall and automatic security updates.',
+        'Nginx as reverse proxy with free TLS certificates from Let’s Encrypt that renew on their own.',
+        'Docker Compose runs the app, workers and database, restarted by systemd.',
+        'Log rotation and nightly database backups to object storage.',
+      ],
+    },
+    {
+      id: 'serverless',
+      name: 'Serverless',
+      line: 'Containers that scale to zero and bill per request.',
+      tiers: [
+        [{ title: 'Users', sub: 'browsers and apps' }],
+        [{ title: { aws: 'App Runner', gcp: 'Cloud Run', azure: 'Container Apps' }, sub: 'HTTPS and custom domain' }],
+        [
+          { title: 'Instance', sub: 'container' },
+          { title: 'Instance', sub: 'container' },
+          { title: 'Instance', sub: 'container' },
+        ],
+        [
+          { title: { aws: 'S3', gcp: 'Cloud Storage', azure: 'Blob Storage' }, sub: 'files and media' },
+          { title: { aws: 'DynamoDB or RDS', gcp: 'Firestore or Cloud SQL', azure: 'Cosmos DB or Azure SQL' }, sub: 'data' },
+        ],
+      ],
+      scale: 2,
+      group: { from: 2, to: 2, label: 'scales from zero' },
+      notes: [
+        'No servers to patch: deploy a container image and the platform runs it.',
+        'Scales to zero when idle, so quiet apps cost almost nothing.',
+        { aws: 'Images live in ECR; Lambda handles short event driven jobs.', gcp: 'Images live in Artifact Registry; Cloud Run jobs handle batch work.', azure: 'Images live in Azure Container Registry; Functions handle event driven jobs.' },
+        'Secrets come from the provider’s secret manager, never from the image.',
+      ],
+    },
+    {
+      id: 'static',
+      name: 'Static & storage',
+      line: 'Sites and media served straight from storage through a CDN.',
+      tiers: [
+        [{ title: 'Users', sub: 'browsers and apps' }],
+        [{ title: { aws: 'CloudFront', gcp: 'Cloud CDN', azure: 'Front Door' }, sub: 'global CDN cache' }],
+        [
+          { title: { aws: 'S3 static website', gcp: 'Cloud Storage bucket', azure: 'Blob static website' }, sub: 'site files' },
+          { title: { aws: 'S3 media bucket', gcp: 'Cloud Storage media', azure: 'Blob media container' }, sub: 'uploads, signed URLs' },
+        ],
+      ],
+      notes: [
+        'Static sites and builds served from storage, cached at the edge worldwide.',
+        'Private uploads use signed URLs that expire.',
+        'Each deploy invalidates the CDN cache, so changes show up at once.',
+        'Also shipped on Netlify for Next.js sites like this one.',
+      ],
+    },
+    {
+      id: 'k8s',
+      name: 'Kubernetes',
+      line: 'Many services, one cluster, rolling updates.',
+      tiers: [
+        [{ title: 'Users', sub: 'browsers and apps' }],
+        [{ title: 'Ingress', sub: 'routing and TLS' }],
+        [
+          { title: 'web pods', sub: 'Next.js' },
+          { title: 'api pods', sub: 'Node.js' },
+          { title: 'worker pods', sub: 'FFmpeg and AI' },
+        ],
+        [{ title: { aws: 'RDS + ElastiCache', gcp: 'Cloud SQL + Redis', azure: 'Azure SQL + Redis' }, sub: 'database and queue' }],
+      ],
+      group: { from: 1, to: 2, label: { aws: 'EKS cluster', gcp: 'GKE cluster', azure: 'AKS cluster' } },
+      notes: [
+        'Horizontal pod autoscaling per service.',
+        'Rolling updates with readiness and liveness probes.',
+        'Self hosted AI models run as their own deployments.',
+        'Config and secrets kept out of images.',
+      ],
+    },
+  ],
+  pipelines: [
+    {
+      id: 'github',
+      name: 'GitHub Actions',
+      stages: ['push', 'install', 'test', 'build image', 'push to registry', 'deploy', 'health check'],
+      line: 'Runs on every push and pull request; deploys from main.',
+    },
+    {
+      id: 'azure',
+      name: 'Azure Pipelines',
+      stages: ['commit', 'build', 'test', 'publish artifact', 'release', 'approval', 'production'],
+      line: 'Build and release stages with an approval gate before production.',
+    },
+    {
+      id: 'aws',
+      name: 'AWS CodePipeline',
+      stages: ['source', 'CodeBuild', 'test', 'image to ECR', 'deploy', 'alarms'],
+      line: 'CodeBuild runs the tests and image; deploys roll back on CloudWatch alarms.',
+    },
+    {
+      id: 'netlify',
+      name: 'Netlify',
+      stages: ['git push', 'build', 'preview', 'atomic deploy', 'live'],
+      line: 'Preview links on every branch; atomic deploys with instant rollback.',
+    },
+  ],
+};
+
 // AI section: the models I work with, and which one I reach for per job.
 export const ai = {
   intro:
@@ -377,10 +528,13 @@ const allSkillClusters = [
       { name: 'GitHub Actions · Azure Pipelines', uses: ['evvot'] },
       { name: 'AWS · CodePipeline', uses: ['shanda', 'hilite'] },
       { name: 'Azure', uses: ['evvot', 'freelance'] },
-      { name: 'GCP · serverless', uses: ['evvot'] },
+      { name: 'Google Cloud', uses: ['evvot', 'freelance'] },
       { name: 'DigitalOcean', uses: ['completegreet', 'freelance'] },
       { name: 'Netlify', uses: ['madany', 'si50', 'aknsprkr'] },
-      { name: 'Linux · Nginx', uses: ['shanda', 'completegreet', 'freelance'] },
+      { name: 'Linux VPS · Nginx', uses: ['shanda', 'completegreet', 'freelance'] },
+      { name: 'Load balancing · auto scaling', uses: ['shanda', 'freelance'] },
+      { name: 'Cloud Run · serverless', uses: ['evvot', 'freelance'] },
+      { name: 'Object storage · CDN', uses: ['evvot', 'freelance'] },
       { name: 'Testing (Jest)', uses: ['shanda', 'hilite'] },
     ],
   },
@@ -471,6 +625,7 @@ export const rowing = {
 export const sections = [
   { id: 'experience', label: 'Experience' },
   { id: 'work', label: 'Work' },
+  { id: 'cloud', label: 'Cloud' },
   { id: 'ai', label: 'AI' },
   { id: 'reviews', label: 'Reviews' },
   { id: 'skills', label: 'Skills' },
