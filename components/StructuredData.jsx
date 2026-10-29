@@ -14,7 +14,7 @@ export default function StructuredData() {
     jobTitle: 'Software Engineer',
     description: seo.description,
     worksFor: { '@type': 'Organization', name: shanda.company },
-    address: { '@type': 'PostalAddress', addressLocality: 'Cairo', addressCountry: 'EG' },
+    address: { '@type': 'PostalAddress', addressLocality: 'Dubai', addressCountry: 'AE' },
     knowsAbout: skillClusters.flatMap((c) => c.skills.map((s) => s.name)),
     knowsLanguage: ['en', 'ar'],
     sameAs: profile.links.map((l) => l.href),

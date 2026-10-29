@@ -7,7 +7,7 @@ import Reveal from './Reveal';
 import './Contact.css';
 
 const TOPICS = ['Project', 'Job opportunity', 'Collaboration', 'Just saying hi'];
-const STAGES = ['your message', '/api/contact', 'inbox · Cairo'];
+const STAGES = ['your message', '/api/contact', `inbox · ${profile.location.split(',')[0]}`];
 
 function useClock(timeZone) {
   const [now, setNow] = useState('');
