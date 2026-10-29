@@ -9,8 +9,8 @@ export const profile = {
   location: 'Cairo, Egypt',
   timeZone: 'Africa/Cairo',
   email: 'abdallah22335a@gmail.com',
-  phone: '+20 115 686 1435',
-  whatsapp: 'https://wa.me/201156861435',
+  phone: '+971 58 255 9056',
+  whatsapp: 'https://wa.me/971582559056',
   cv: '/Abdallah-ElTohamy-Resume.pdf',
   links: [
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/abdallah-el-tohamy-75bb432a8/' },
